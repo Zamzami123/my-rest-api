@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 global.creator = 'Sregep Shop'// yourname
-global.MONGO_DB_URI = "mongodb+srv://Zakizami1234:Zakizami1234@cluster0.ox7kbah.mongodb.net/?retryWrites=true&w=majority'" //database mongodb 
+global.MONGO_DB_URI = "mongodb+srv://Zakizami1234:Zakizami1234@cluster0.ox7kbah.mongodb.net/?retryWrites=true&w=majority" //database mongodb 
 global.ACTIVATION_TOKEN_SECRET = "-@Pqnap+@(/1jAPPnew/@10" //isi apa aja bebas
 global.your_email = "akunfrefirepertama@gmail.com" //email
 global.email_password = "bvec nakn dyrm tiks" //application password email
