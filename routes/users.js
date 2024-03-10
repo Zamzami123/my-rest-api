@@ -33,7 +33,7 @@ router.post('/login', async (req, res, next) => {
                   <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                     <i class="tim-icons icon-simple-remove"></i>
                   </button>
-                  <span><b>Username or password not found</span>
+                  <span><b>Nama pengguna atau kata sandi tidak ditemukan</span>
                 </div>`,
    })(req, res, next);
 });
@@ -59,14 +59,14 @@ router.get('/activation/', async (req, res) => {
          let checking = await checkUsername(username);
          let checkingEmail = await checkEmail(email);
          if (checking) {
-            req.flash('error_msg', "Sorry. A user with that username already exists. Please use another username!")
+            req.flash('error_msg', "Maaf. Pengguna dengan nama pengguna tersebut sudah ada. Silakan gunakan nama pengguna lain!")
             res.redirect("/users/signup");
          } else if (checkingEmail) {
-            req.flash('error_msg', "Sorry. A user with that email address already exists. Please use another email!")
+            req.flash('error_msg', "Maaf. Pengguna dengan alamat email tersebut sudah ada. Silakan gunakan email lain!")
             res.redirect("/users/signup");
          } else {
             addUser(username, email, password, apikey);
-            req.flash('success_msg', "Sign up successful. Please login to use our service.")
+            req.flash('success_msg', "Pendaftaran berhasil. Silakan login untuk menggunakan layanan kami.")
             res.redirect("/users/login");
          }
       }
@@ -87,18 +87,18 @@ router.post('/signup', async (req, res) => {
          pass2
       } = req.body;
       if (pass.length < 6 || pass2 < 6) {
-         req.flash('error_msg', 'Password must contain at least 6 characters');
+         req.flash('error_msg', 'Kata sandi harus mengandung minimal 6 karakter');
          return res.redirect('/users/signup');
       }
       if (pass === pass2) {
          let checking = await checkUsername(username);
          let checkingEmail = await checkEmail(email);
          if (checkingEmail) {
-            req.flash('error_msg', 'A user with the same Email already exists');
+            req.flash('error_msg', 'Pengguna dengan Email yang sama sudah ada');
             return res.redirect('/users/signup');
          }
          if (checking) {
-            req.flash('error_msg', 'A user with the same Username already exists');
+            req.flash('error_msg', 'Nama Pengguna sudah digunakan !');
             return res.redirect('/users/signup');
          } else {
             let hashedPassword = getHashedPassword(pass);
@@ -112,11 +112,11 @@ router.post('/signup', async (req, res) => {
             const activationToken = createActivationToken(newUser)
             const url = `https://${req.hostname}/users/activation?id=${activationToken}`
             await sendEmail.inboxGmailRegist(email, url);
-            req.flash('success_msg', 'You are now registered, please check your email to verify your account');
+            req.flash('success_msg', 'Anda sekarang sudah terdaftar, silakan periksa email Anda untuk memverifikasi akun Anda');
             return res.redirect('/users/login');
          }
       } else {
-         req.flash('error_msg', 'Password and Password confirmation are not the same');
+         req.flash('error_msg', 'Konfirmasi Kata Sandi dan Kata Sandi tidak sama');
          return res.redirect('/users/signup');
       }
    } catch (err) {
