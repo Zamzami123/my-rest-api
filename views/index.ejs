@@ -635,4 +635,37 @@ $('body').removeClass('white-content');
 <script>
   function getvisitor(){
               var xhr = new XMLHttpRequest();
-              var url = 'https://api.cou
+              var url = 'https://api.countapi.xyz/hit/api-alphabot.herokuapp.com/visits';
+              xhr.onloadend = function(){
+             data = JSON.parse(this.responseText);
+  document.getElementById("visitor").textContent = data.value
+              };
+              xhr.open("GET", url, true);
+              xhr.send();
+  }
+ 
+ </script>
+ <script>
+    $.getJSON("https://api.ipify.org?format=json",
+      function(data) {
+        $("#ip").html(data.ip);
+      })
+  </script>
+<script>
+$(document).ready(function() {
+demo.initDashboardPageCharts();
+
+});
+</script>
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+window.TrackJS &&
+TrackJS.install({
+token: "ee6fab19c5a04ac1a32a645abde4613a",
+application: "black-dashboard-free"
+});
+</script>
+</body>
+  
+</script>
+</html>
